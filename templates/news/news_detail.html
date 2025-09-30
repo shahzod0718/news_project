@@ -1,0 +1,17 @@
+{%extends 'news/base.html'%}
+
+{%load static%}
+
+{%block title%}Detail page{%endblock title%}
+
+{% block content %}
+    <div class="overflow-hidden rounded">
+        <img src="{{news.image.url}}" class="img-zoomin img-fluid rounded w-100" alt="">
+
+    </div>
+    <h2>{{news.title}}</h2>
+    <p>{{news.body}}</p>
+
+
+
+{%endblock content%}
