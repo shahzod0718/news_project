@@ -90,22 +90,23 @@
                         </button>
                         <div class="collapse navbar-collapse bg-light py-3" id="navbarCollapse">
                             <div class="navbar-nav mx-auto border-top">
-                                <a href="{%url 'home_page'%}" class="nav-item nav-link active">Home</a>
-                                <a href="{%url 'detail_page'%}" class="nav-item nav-link">Detail  Page</a>
-                                <a href="{%url 'error404_page'%}" class="nav-item nav-link">404 Page</a>
+                                <a href="{%url 'home_page'%}" class="nav-item nav-link active">Bosh sahifa</a>
+                                <a href="{%url 'detail_page'%}" class="nav-item nav-link">Batafsil sahifa</a>
+                                <a href="{%url 'error404_page'%}" class="nav-item nav-link">Xato sahifa (404)</a>
                                 <div class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Kategoriya</a>
                                     
                                     <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                         
-                                        <a href="{%url 'detail_page'%}" class="dropdown-item">Sport</a>
-                                        <a href="#" class="dropdown-item">Mahalliy</a>
-                                        <a href="#" class="dropdown-item">Xorij</a>
-                                        <a href="#" class="dropdown-item">Texnologiya</a>
+                                        <a href="{%url 'sport_page'%}" class="dropdown-item">Sport</a>
+                                        <a href="{%url 'mahalliy_page'%}" class="dropdown-item">Mahalliy</a>
+                                        <a href="{%url 'xorij_page'%}" class="dropdown-item">Xorij</a>
+                                        <a href="{%url 'texnologiya_page'%}" class="dropdown-item">Texnologiya</a>
+                                        <a href="{%url 'shou_biznes_page'%}" class="dropdown-item">Shou Biznes</a>
                                     
                                     </div>
                                 </div>
-                                <a href="{%url 'contact_page'%}" class="nav-item nav-link">Contact Us</a>
+                                <a href="{%url 'contact_page'%}" class="nav-item nav-link">Biz bilan bog‘lanish</a>
                             </div>
                             <div class="d-flex flex-nowrap border-top pt-3 pt-xl-0">
                                 <div class="d-flex">
@@ -114,8 +115,8 @@
                                         <strong class="fs-4 text-secondary">31°C</strong>
                                         <div class="d-flex flex-column ms-2" style="width: 150px;">
                                             <span class="text-body">TOSHKENT,</span>
-                                            <small>{{today|date:"l d-m-Y  "}}</small>
-                                            <h3>{{today|date:"H:i"}}</h3>
+                                            <!-- <small>{{today|date:" d-m-Y  "}}</small> -->
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -134,12 +135,15 @@
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content rounded-0">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Qidiruv Oynasi</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    
                     <div class="modal-body d-flex align-items-center">
                         <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                            <form aria-describedby="search-icon-1" class="form-control p-3" method="get" action="{%url 'search_results'%}">
+                                <input type="search" name="q" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                            </form>
                             <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
                         </div>
                     </div>
@@ -193,7 +197,7 @@
                         <div class="footer-item-1">
                             <h4 class="mb-4 text-white">Biz Bilan Bog'laning</h4>
                             <p class="text-secondary line-h">Address: <span class="text-white">Termiz,Sh.Rashidov</span></p>
-                            <p class="text-secondary line-h">Email: <span class="text-white">shaxzodomondavlatov@gmail.com</span></p>
+                            <p class="text-secondary line-h">Email: <span class="text-white">shahzodbekomondavlatov77@gmail.com</span></p>
                             <p class="text-secondary line-h">Phone: <span class="text-white">+998 91 982 76 07</span></p>
                             <div class="d-flex line-h">
                                 <a class="btn btn-light me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter text-dark"></i></a>
@@ -208,7 +212,26 @@
                         <div class="d-flex flex-column text-start footer-item-3">
                             <h4 class="mb-4 text-white">Kategoriya</h4>
                             {%for category in categories%}
-                            <a class="btn-link text-white" href=""><i class="fas fa-angle-right text-white me-2"></i>{{category.name|capfirst}}</a>
+
+                            {% if category.name == "mahalliy" %}
+                            <a class="btn-link text-white" href="{%url 'mahalliy_page'%}">
+                                <i class="fas fa-angle-right text-white me-2"></i>{{category.name|capfirst}}</a>
+                            {% elif category.name == "sport" %}
+                            <a class="btn-link text-white" href="{%url 'sport_page'%}">
+                                <i class="fas fa-angle-right text-white me-2"></i>{{category.name|capfirst}}</a>
+                            {% elif category.name == "xorij" %}
+                            <a class="btn-link text-white" href="{%url 'xorij_page'%}">
+                                <i class="fas fa-angle-right text-white me-2"></i>{{category.name|capfirst}}</a>
+                            {% elif category.name == "texnologiya" %}
+                            <a class="btn-link text-white" href="{%url 'texnologiya_page'%}">
+                                <i class="fas fa-angle-right text-white me-2"></i>{{category.name|capfirst}}</a>
+                            {% elif category.name == "shouBiznes" %}
+                            <a class="btn-link text-white" href="{%url 'shou_biznes_page'%}">
+                                <i class="fas fa-angle-right text-white me-2"></i>{{category.name|capfirst}}</a>
+                            {%endif%}
+
+
+
                             {%endfor%}
                         </div>
                     </div>
