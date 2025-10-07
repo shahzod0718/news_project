@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 
 
@@ -29,6 +31,7 @@ class News(models.Model):
     title=models.CharField(max_length=250)
     slug=models.SlugField(max_length=250)
     body=models.TextField()
+    body = RichTextUploadingField()
     image = models.ImageField(upload_to='news/images')
     category=models.ForeignKey(Category,
                     on_delete=models.CASCADE,

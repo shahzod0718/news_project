@@ -7,6 +7,10 @@ name = "pypi"
 django = "==4.0"
 pillow = "*"
 django-hitcount = "*"
+django-ckeditor = "*"
+django-modeltranslation = "*"
+python-gettext = "*"
+python-decouple = "*"
 
 [dev-packages]
 

@@ -1,5 +1,6 @@
 
 {%load static %}
+ {% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -52,11 +53,13 @@
                                 <p class="mb-0 text-white fs-6 fw-normal">Mashhur</p>
                             </div>
                             <div class="overflow-hidden" style="width: 735px;">
-                                <div id="note" class="ps-2">
-                                    {%for news in latest_news%}
-                                    <img src="{{news.image.url}}" class="img-fluid rounded-circle border border-3 border-primary me-2" style="width: 30px; height: 30px;" alt="">
-                                    <a href="#"><p class="text-white mb-0 link-hover">{{news.title|truncatewords:5}}</p></a>
-                                    {%endfor%}
+                                <div id="note" class="ps-2 d-flex" style="white-space: nowrap;">
+                                    {% for news in latest_news %}
+                                    <div class="d-flex align-items-center me-4">
+                                        <img src="{{news.image.url}}" class="img-fluid rounded-circle border border-3 border-primary me-2" style="width: 30px; height: 30px;" alt="">
+                                        <p class="text-white mb-0 link-hover">{{news.title|truncatewords:5}}</p>
+                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -66,13 +69,14 @@
                             
                             <div class="d-flex icon">
                                 <p class="mb-0 text-white me-2">Ijtimoiy Tarmoqlar:</p>
-                                <a href="" class="me-2"><i class="fab fa-facebook-f text-body link-hover"></i></a>
-                                <a href="" class="me-2"><i class="fab fa-twitter text-body link-hover"></i></a>
-                                <a href="" class="me-2"><i class="fab fa-instagram text-body link-hover"></i></a>
-                                <a href="" class="me-2"><i class="fab fa-youtube text-body link-hover"></i></a>
-                                <a href="" class="me-2"><i class="fab fa-linkedin-in text-body link-hover"></i></a>
-                                <a href="" class="me-2"><i class="fab fa-skype text-body link-hover"></i></a>
-                                <a href="" class=""><i class="fab fa-pinterest-p text-body link-hover"></i></a>
+                                <a href="https://www.facebook.com/shahzod.omondavlatov" class="me-2"><i class="fab fa-facebook-f text-body link-hover"></i></a>
+                                <!-- <a href="" class="me-2"><i class="fab fa-twitter text-body link-hover"></i></a> -->
+                                <a href="https://www.instagram.com/janob_hechkim64/" class="me-2"><i class="fab fa-instagram text-body link-hover"></i></a>
+                                <a href="https://www.youtube.com/@shahzodbekomondavlatov142" class="me-2"><i class="fab fa-youtube text-body link-hover"></i></a>
+                                <a href="https://t.me/users625" class="me-2"><i class="fab fa-telegram text-body link-hover"></i></a>
+                                <!-- <a href="" class="me-2"><i class="fab fa-linkedin-in text-body link-hover"></i></a> -->
+                                <!-- <a href="" class="me-2"><i class="fab fa-skype text-body link-hover"></i></a> -->
+                                <!-- <a href="" class=""><i class="fab fa-pinterest-p text-body link-hover"></i></a> -->
                             </div>
                         </div>
                     </div>
@@ -82,8 +86,8 @@
                 <div class="container px-0">
                     <nav class="navbar navbar-light navbar-expand-xl">
                         <a href="{%url 'home_page'%}" class="navbar-brand mt-3">
-                            <p class="text-primary display-6 mb-2" style="line-height: 0;">Newsers</p>
-                            <small class="text-body fw-normal" style="letter-spacing: 12px;">Nespaper</small>
+                            <p class="text-primary display-5 mb-2" style="line-height: 0;">Yangilik.uz</p>
+                            <!-- <small class="text-body fw-normal" style="letter-spacing: 12px;">yangi Xabarlar</small> -->
                         </a>
                         <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                             <span class="fa fa-bars text-primary"></span>
@@ -91,8 +95,8 @@
                         <div class="collapse navbar-collapse bg-light py-3" id="navbarCollapse">
                             <div class="navbar-nav mx-auto border-top">
                                 <a href="{%url 'home_page'%}" class="nav-item nav-link active">Bosh sahifa</a>
-                                <a href="{%url 'detail_page'%}" class="nav-item nav-link">Batafsil sahifa</a>
-                                <a href="{%url 'error404_page'%}" class="nav-item nav-link">Xato sahifa (404)</a>
+                                <!-- <a href="{%url 'detail_page'%}" class="nav-item nav-link">Batafsil sahifa</a> -->
+                                
                                 <div class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Kategoriya</a>
                                     
@@ -107,21 +111,33 @@
                                     </div>
                                 </div>
                                 <a href="{%url 'contact_page'%}" class="nav-item nav-link">Biz bilan bog‘lanish</a>
+                                <a href="{%url 'error404_page'%}" class="nav-item nav-link">Xato sahifa (404)</a>
                             </div>
-                            <div class="d-flex flex-nowrap border-top pt-3 pt-xl-0">
-                                <div class="d-flex">
-                                    <img src="{%static 'images/weather-icon.png'%}" class="img-fluid w-100 me-2" alt="">
-                                    <div class="d-flex align-items-center">
-                                        <strong class="fs-4 text-secondary">31°C</strong>
-                                        <div class="d-flex flex-column ms-2" style="width: 150px;">
-                                            <span class="text-body">TOSHKENT,</span>
-                                            <!-- <small>{{today|date:" d-m-Y  "}}</small> -->
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn-search btn border border-primary btn-md-square rounded-circle bg-white my-auto" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                            <div class="d-flex align-items-center gap-3 border-top pt-3 pt-xl-0">
+                                <!-- <form action="{% url 'set_language' %}" method="post" class="d-flex align-items-center gap-2">
+                                    {% csrf_token %}
+                                    <input name="next" type="hidden" value="{{ redirect_to }}">
+                                    <select name="language" class="form-select form-select-sm">
+                                        {% get_current_language as LANGUAGE_CODE %}
+                                        {% get_available_languages as LANGUAGES %}
+                                        {% get_language_info_list for LANGUAGES as languages %}
+                                        {% for language in languages %}
+                                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                                                {{ language.name_local }} ({{ language.code }})
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        <i class="  me-1"></i> Go
+                                    </button>
+                                </form> -->
+
+                                <button class="btn btn-white border border-primary btn-md-square rounded-circle" 
+                                        data-bs-toggle="modal" data-bs-target="#searchModal">
+                                    <i class="fas fa-search text-primary"></i>
+                                </button>
                             </div>
+
                         </div>
                     </nav>
                 </div>

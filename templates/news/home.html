@@ -3,10 +3,11 @@
 {%load static%} 
 {%block title%} Bosh sahifa {%endblock title%}
 {% load hitcount_tags %}
+{%load i18n%}
 
 {%block content%}
         <!-- Features Start -->
-        <div class="container-fluid features mb-5">
+        <div class="container-fluid features mb-1">
             <div class="container py-5">
                 <div class="row g-4">
                 
@@ -27,15 +28,15 @@
                             <img src="{{ news.image.url }}" class="img-fluid rounded img-zoomin w-100" alt="">
                             <div class="d-flex justify-content-center px-4 position-absolute flex-wrap" style="bottom: 10px; left: 0;">
                                 <!-- <a href="#" class="text-white me-3 link-hover"><i class="fa fa-clock"></i> 06 minute read</a> -->
-                                <a href="#" class="text-white me-3 link-hover"><i class="fa fa-eye"></i>{% get_hit_count for news %}</a>
-                                <a href="#" class="text-white me-3 link-hover"><i class="fa fa-comment-dots"></i>{{news.comment_count}}</a>
-                                <a href="#" class="text-white link-hover"><i class="fa fa-arrow-up"></i> 1.5k Share</a>
+                                <a href="#" class="text-white me-3 link-hover"><i class="fa fa-eye"></i>{% get_hit_count for news %} ta ko'rildi</a>
+                                <!-- <a href="#" class="text-white me-3 link-hover"><i class="fa fa-comment-dots"></i> 05 Comment</a>
+                                <a href="#" class="text-white link-hover"><i class="fa fa-arrow-up"></i> 1.5k Share</a> -->
                             </div>
                         </div>
                         <div class="border-bottom py-3">
                             <a href="{{news.get_absolute_url}}"  class="display-6 text-dark mb-0 link-hover">{{news.title }}</a>
                         </div>
-                        <p class="mt-3 mb-4">{{ news.body |truncatewords:10 }}</p>
+                        <p class="mt-3 mb-4">{{ news.body |truncatewords:20|safe }}</p>
                     {%endfor%}
 
 
@@ -44,19 +45,19 @@
                     {% for news in most_viewed_news_list %}
                         <div class="bg-light p-4 rounded">
                             <div class="news-2">
-                                <h3 class="mb-4">Ommabop</h3>
+                                <h3 class="mb-4">{%blocktrans%}Ommabop{%endblocktrans%}</h3>
                             </div>
                             <div class="row g-4 align-items-center">
                                 <div class="col-md-6">
                                     <div class="rounded overflow-hidden">
-                                        <img src="{}" class="img-fluid rounded img-zoomin w-100" alt="">
+                                        <img src="{{news.image.url}}" class="img-fluid rounded img-zoomin w-100" alt="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="d-flex flex-column">
                                         <a href="{{ news.get_absolute_url }}" class="h3">{{ news.title }}</a>
                                         <!-- <p class="mb-0 fs-5"><i class="fa fa-clock"> 06 minute read</i> </p> -->
-                                        <p class="mb-0 fs-5"><i class="fa fa-eye"> {% get_hit_count for news %}</i></p>
+                                        <p class="mb-0 fs-5"><i class="fa fa-eye"> {% get_hit_count for news %} ta ko'rildi</i></p>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +77,7 @@
                                     <div class="d-flex flex-column">
                                         <a href="{{news.get_absolute_url}}" class="h4 mb-2">{{news.title}}</a>
                                         <!-- <p class="fs-5 mb-0"><i class="fa fa-clock"> 06 minute read</i> </p> -->
-                                        <p class="fs-5 mb-0"><i class="fa fa-eye">{% get_hit_count for news %}</i></p>
+                                        <p class="fs-5 mb-0"><i class="fa fa-eye"> {% get_hit_count for news %}{%blocktrans%} ta ko'rildi{%endblocktrans%}</i></p>
                                     </div>
                                 </div>
                                 {%endfor%}
@@ -94,7 +95,7 @@
                                             <div class="features-content d-flex flex-column">
                                                 <a href="{{news.get_absolute_url}}" class="h6">{{news.title}}</a>
                                                 <!-- <small><i class="fa fa-clock"> 06 minute read</i> </small> -->
-                                                <small><i class="fa fa-eye">{% get_hit_count for news %}</i></small>
+                                                <small><i class="fa fa-eye"> {% get_hit_count for news %}{%blocktrans%} ta ko'rildi{%endblocktrans%}</i></small>
                                             </div>
                                         </div>
                                     </div>
@@ -115,7 +116,7 @@
 
 
         <!-- Banner Start -->
-        <div class="container-fluid py-5 my-5" style="background: linear-gradient(rgba(202, 203, 185, 1), rgba(202, 203, 185, 1));">
+        <!-- <div class="container-fluid py-5 my-5" style="background: linear-gradient(rgba(202, 203, 185, 1), rgba(202, 203, 185, 1));">
             <div class="container">
                 <div class="row g-4 align-items-center">
                     <div class="col-lg-7">
@@ -134,14 +135,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Banner End -->
 
 
         <!-- Latest News Start -->
         <div class="container-fluid latest-news py-5">
             <div class="container py-5">
-                <h2 class="mb-4">So‘nggi yangiliklar</h2>
+                <h2 class="mb-4">{%blocktrans%}So‘nggi yangiliklar{%endblocktrans%}</h2>
                 <div class="latest-news-carousel owl-carousel">
                     
                     {%for news in news_list%}
@@ -209,14 +210,16 @@
                                                     Sports
                                                 </div>
                                             </div>
+                                                <a href="#" class="text-dark link-hover me-3"><i class="fa fa-eye"></i>  {% get_hit_count for sports %} ta ko'rildi</a>
+
                                             <div class="my-4">
                                                 <a href="{{sports.get_absolute_url}}" class="h4">{{sports.title}}</a>
+                                                <p>{{sports.body|safe|truncatewords:50}}</p>
                                             </div>
                                             <div class="d-flex justify-content-between">
                                                 <!-- <a href="#" class="text-dark link-hover me-3"><i class="fa fa-clock"></i> 06 minute read</a> -->
-                                                <a href="#" class="text-dark link-hover me-3"><i class="fa fa-eye"></i> {% get_hit_count for sports %}</a>
-                                                <a href="#" class="text-dark link-hover me-3"><i class="fa fa-comment-dots"></i> 05 Comment</a>
-                                                <a href="#" class="text-dark link-hover"><i class="fa fa-arrow-up"></i> 1.5k Share</a>
+                                                <!-- <a href="#" class="text-dark link-hover me-3"><i class="fa fa-comment-dots"></i> 05 Comment</a> -->
+                                                <!-- <a href="#" class="text-dark link-hover"><i class="fa fa-arrow-up"></i> 1.5k Share</a> -->
                                             </div>
                                             
                                             {%endfor%}
@@ -268,9 +271,9 @@
                                             
                                             <div class="d-flex justify-content-between">
                                                 <!-- <a href="#" class="text-dark link-hover me-3"><i class="fa fa-clock"></i> 06 minute read</a> -->
-                                                <a href="#" class="text-dark link-hover me-3"><i class="fa fa-eye"></i>{% get_hit_count for local %}</a>
-                                                <a href="#" class="text-dark link-hover me-3"><i class="fa fa-comment-dots"></i> 05 Comment</a>
-                                                <a href="#" class="text-dark link-hover"><i class="fa fa-arrow-up"></i> 1.5k Share</a>
+                                                <a href="#" class="text-dark link-hover me-3"><i class="fa fa-eye"></i> {% get_hit_count for local %} ta ko'rildi</a>
+                                                <!-- <a href="#" class="text-dark link-hover me-3"><i class="fa fa-comment-dots"></i> 05 Comment</a> -->
+                                                <!-- <a href="#" class="text-dark link-hover"><i class="fa fa-arrow-up"></i> 1.5k Share</a> -->
                                             </div>
                                         </div>
 
@@ -319,9 +322,9 @@
                                             
                                             <div class="d-flex justify-content-between">
                                                 <!-- <a href="#" class="text-dark link-hover me-3"><i class="fa fa-clock"></i> 06 minute read</a> -->
-                                                <a href="#" class="text-dark link-hover me-3"><i class="fa fa-eye"></i>{% get_hit_count for xorijiy %}</a>
-                                                <a href="#" class="text-dark link-hover me-3"><i class="fa fa-comment-dots"></i> 05 Comment</a>
-                                                <a href="#" class="text-dark link-hover"><i class="fa fa-arrow-up"></i> 1.5k Share</a>
+                                                <a href="#" class="text-dark link-hover me-3"><i class="fa fa-eye"></i> {% get_hit_count for xorijiy %} ta ko'rildi</a>
+                                                <!-- <a href="#" class="text-dark link-hover me-3"><i class="fa fa-comment-dots"></i> 05 Comment</a> -->
+                                                <!-- <a href="#" class="text-dark link-hover"><i class="fa fa-arrow-up"></i> 1.5k Share</a> -->
                                             </div>
                                         </div>
                                         {%endfor%}
@@ -369,9 +372,9 @@
                                             
                                             <div class="d-flex justify-content-between">
                                                 <!-- <a href="#" class="text-dark link-hover me-3"><i class="fa fa-clock"></i> 06 minute read</a> -->
-                                                <a href="#" class="text-dark link-hover me-3"><i class="fa fa-eye"></i>{% get_hit_count for techno %}</a>
-                                                <a href="#" class="text-dark link-hover me-3"><i class="fa fa-comment-dots"></i> 05 Comment</a>
-                                                <a href="#" class="text-dark link-hover"><i class="fa fa-arrow-up"></i> 1.5k Share</a>
+                                                <a href="#" class="text-dark link-hover me-3"><i class="fa fa-eye"></i> {% get_hit_count for techno %} ta ko'rildi</a>
+                                                <!-- <a href="#" class="text-dark link-hover me-3"><i class="fa fa-comment-dots"></i> 05 Comment</a> -->
+                                                <!-- <a href="#" class="text-dark link-hover"><i class="fa fa-arrow-up"></i> 1.5k Share</a> -->
                                             </div>
                                         </div>
                                         {%endfor%}
@@ -460,28 +463,28 @@
                                         <h4 class="mb-4">Ijtimoiy tarmoqlarda kuzating</h4>
                                         <div class="row g-4">
                                             <div class="col-12">
-                                                <a href="https://www.instagram.com/janob_hechkim64" target="_blank" class="w-100 rounded btn btn-primary d-flex align-items-center p-3 mb-2">
+                                                <a href="https://www.facebook.com/shahzod.omondavlatov" target="_blank" class="w-100 rounded btn btn-primary d-flex align-items-center p-3 mb-2">
                                                     <i class="fab fa-facebook-f btn btn-light btn-square rounded-circle me-3"></i>
                                                     <span class="text-white">13,977 Fans</span>
                                                 </a>
-                                                <a href="#" class="w-100 rounded btn btn-danger d-flex align-items-center p-3 mb-2">
+                                                <a href="#" class="w-100 rounded btn btn-info d-flex align-items-center p-3 mb-2">
                                                     <i class="fab fa-twitter btn btn-light btn-square rounded-circle me-3"></i>
                                                     <span class="text-white">21,798 Follower</span>
                                                 </a>
-                                                <a href="#" class="w-100 rounded btn btn-warning d-flex align-items-center p-3 mb-2">
+                                                <a href="https://www.youtube.com/@shahzodbekomondavlatov142" class="w-100 rounded btn btn-danger d-flex align-items-center p-3 mb-2">
                                                     <i class="fab fa-youtube btn btn-light btn-square rounded-circle me-3"></i>
                                                     <span class="text-white">7,999 Subscriber</span>
                                                 </a>
-                                                <a href="#" class="w-100 rounded btn btn-dark d-flex align-items-center p-3 mb-2">
+                                                <a href="https://www.instagram.com/janob_hechkim64" class="w-100 rounded btn btn-dark d-flex align-items-center p-3 mb-2">
                                                     <i class="fab fa-instagram btn btn-light btn-square rounded-circle me-3"></i>
                                                     <span class="text-white">19,764 Follower</span>
                                                 </a>
-                                                <a href="#" class="w-100 rounded btn btn-secondary d-flex align-items-center p-3 mb-2">
+                                                <!-- <a href="#" class="w-100 rounded btn btn-secondary d-flex align-items-center p-3 mb-2">
                                                     <i class="bi-cloud btn btn-light btn-square rounded-circle me-3"></i>
                                                     <span class="text-white">31,999 Subscriber</span>
-                                                </a>
-                                                <a href="#" class="w-100 rounded btn btn-warning d-flex align-items-center p-3 mb-4">
-                                                    <i class="fab fa-dribbble btn btn-light btn-square rounded-circle me-3"></i>
+                                                </a> -->
+                                                <a href="https://t.me/users625" class="w-100 rounded btn btn-secondary d-flex align-items-center p-3 mb-4">
+                                                    <i class="fab fa-telegram btn btn-light btn-square rounded-circle me-3"></i>
                                                     <span class="text-white">37,999 Subscriber</span>
                                                 </a>
                                             </div>
@@ -595,9 +598,7 @@
                                                     
                                                 </ul>
                                             </div>
-                                            <div class="col-lg-12">
-                                                
-                                            </div>
+                                        
                                         </div>
                                     </div>
                                 </div>

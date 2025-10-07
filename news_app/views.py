@@ -66,6 +66,7 @@ def news_list(request):
 #     return render(request,'news/news_detail.html',context)
 
 def news_detail(request, news):
+    
     news = get_object_or_404(News, slug=news, status=News.Status.Published)
     context = {}
 
@@ -96,12 +97,55 @@ def news_detail(request, news):
     else:
         comment_form = CommentForm()
 
+
+
+
+    news_one=News.published.order_by('-publish_time')[:1]
+    news_two=News.published.order_by('-publish_time')[1:2]
+    
+
+    local_one=News.published.filter(category__name='mahalliy').order_by('-publish_time')[:1]
+    local_news=News.published.all().filter(category__name='mahalliy').order_by('-publish_time')[1:6]
+    
+    sport_one=News.published.filter(category__name='sport').order_by('-publish_time')[:1]
+    sport_news=News.published.all().filter(category__name='sport').order_by('-publish_time')[1:2]
+    
+
+    xorij_one=News.published.filter(category__name='xorij').order_by('-publish_time')[:1]
+    xorij_news=News.published.all().filter(category__name='xorij').order_by('-publish_time')[1:6]
+
+
+    techno_one=News.published.filter(category__name='texnologiya').order_by('-publish_time')[:1]
+    techno_news=News.published.all().filter(category__name='texnologiya').order_by('-publish_time')[1:6]
+
+    shou_biznes=News.published.filter(category__name='shouBiznes').order_by('-publish_time')[:2]
+    shou_one=News.published.filter(category__name='shouBiznes').order_by('-publish_time')[:1]
+    categories=Category.objects.all()
+
+
+
+
     context.update({
         'news': news,
         'comments': comments,
         'comment_count':comment_count,
         'new_comment': new_comment,
         'comment_form': comment_form,
+        'news_one':news_one,
+        'news_two':news_two,
+        'local_one':local_one,
+        'local_news':local_news,
+        'sport_one':sport_one,
+        'sport_news':sport_news,
+        'xorij_one':xorij_one,
+        'xorij_news':xorij_news,
+        "techno_one":techno_one,
+        'techno_news':techno_news,
+        'shou_biznes':shou_biznes,
+        'categories':categories,
+        'shou_one':shou_one,
+        
+        
         
 
     })
@@ -116,7 +160,7 @@ def homePageView(request):
     categories=Category.objects.all()
     news_one=News.published.order_by('-publish_time')[:1]
     news_two=News.published.order_by('-publish_time')[1:2]
-    news_list=News.published.all().order_by('-publish_time')[2:6]
+    news_list=News.published.all().order_by('-publish_time')[2:8]
 
     local_one=News.published.filter(category__name='mahalliy').order_by('-publish_time')[:1]
     local_news=News.published.all().filter(category__name='mahalliy').order_by('-publish_time')[1:6]
